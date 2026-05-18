@@ -1,12 +1,8 @@
 <div align="center">
-  ██████╗ ██████╗ ██╗███╗   ███╗ ██████╗ ██╗██████╗ ███████╗
-██╔════╝ ██╔══██╗██║████╗ ████║██╔═══██╗██║██╔══██╗██╔════╝
-██║  ███╗██████╔╝██║██╔████╔██║██║   ██║██║██████╔╝█████╗
-██║   ██║██╔══██╗██║██║╚██╔╝██║██║   ██║██║██╔══██╗██╔══╝
-╚██████╔╝██║  ██║██║██║ ╚═╝ ██║╚██████╔╝██║██║  ██║███████╗
-╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝╚═╝  ╚═╝╚══════╝
 
-### 🔮 Un grimoire Hyprland pour la communauté francophone
+# 🔮 Grimoire
+
+### Un grimoire Hyprland pour la communauté francophone
 
 ![Version](https://img.shields.io/badge/version-1.0.0-e0789a?style=for-the-badge)
 ![Hyprland](https://img.shields.io/badge/Hyprland-0.55-bd93f9?style=for-the-badge)
