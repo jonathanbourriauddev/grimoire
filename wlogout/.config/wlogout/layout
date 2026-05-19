@@ -11,18 +11,6 @@
     "keybind" : "e"
 }
 {
-    "label" : "suspend",
-    "action" : "systemctl suspend",
-    "text" : "Veille",
-    "keybind" : "u"
-}
-{
-    "label" : "hibernate",
-    "action" : "systemctl hibernate",
-    "text" : "Hibernation",
-    "keybind" : "h"
-}
-{
     "label" : "shutdown",
     "action" : "systemctl poweroff",
     "text" : "Éteindre",

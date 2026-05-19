@@ -1,6 +1,5 @@
 * {
     font-family: "JetBrainsMono Nerd Font";
-    background-image: none;
     border: none;
     outline: none;
 }
@@ -15,8 +14,12 @@ button {
     border-radius: 12px;
     border: 2px solid rgba(224, 120, 154, 0.3);
     margin: 16px;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
+    padding-top: 80px;
+    background-repeat: no-repeat;
+    background-position: center 15px;
+    background-size: 48px;
     transition: all 0.2s ease;
 }
 
@@ -24,11 +27,26 @@ button:hover {
     background-color: rgba(224, 120, 154, 0.25);
     border-color: #e0789a;
     color: #e0789a;
-    font-size: 20px;
 }
 
 button:focus {
     background-color: rgba(224, 120, 154, 0.35);
     border-color: #e0789a;
     color: #e0789a;
+}
+
+#lock {
+    background-image: image(url("/usr/share/wlogout/icons/lock.png"));
+}
+
+#logout {
+    background-image: image(url("/usr/share/wlogout/icons/logout.png"));
+}
+
+#shutdown {
+    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"));
+}
+
+#reboot {
+    background-image: image(url("/usr/share/wlogout/icons/reboot.png"));
 }

@@ -1,2 +1,1 @@
-#!/bin/bash
-wlogout --protocol layer-shell -b 5 -T 400 -B 400 --css ~/.config/wlogout/style.css
+wlogout -b 2 -T 200 -B 200 -C /home/joe/.config/wlogout/style.css

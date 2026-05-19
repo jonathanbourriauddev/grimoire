@@ -21,6 +21,7 @@ hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("~/dotfiles/scripts/wallpaper.sh"))
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("~/dotfiles/scripts/wlogout.sh"))
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("/home/joe/dotfiles/scripts/lock.sh"))
 
 -- Screenshots
 hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'))
