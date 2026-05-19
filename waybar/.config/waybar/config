@@ -6,12 +6,22 @@
     "margin-top": 8,
     "margin-left": 12,
     "margin-right": 12,
+
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "network", "battery", "tray", "custom/power"],
+    "modules-right": ["pulseaudio", "bluetooth", "network", "battery", "tray"],
 
     "hyprland/workspaces": {
-        "format": "{name}",
+        "format": "{icon}",
+        "format-icons": {
+            "1": "·",
+            "2": "·",
+            "3": "·",
+            "4": "·",
+            "5": "·",
+            "active": "🔮",
+            "default": "·"
+        },
         "persistent-workspaces": {
             "*": 5
         },
@@ -34,12 +44,21 @@
         "on-click": "pavucontrol"
     },
 
+    "bluetooth": {
+        "format": "󰂯",
+        "format-connected": "󰂱 {device_alias}",
+        "format-connected-battery": "󰂱 {device_alias} {device_battery_percentage}%",
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connecté(s)",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connecté(s)\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "on-click": "blueman-manager"
+    },
+
     "network": {
         "interface": "wlan0",
         "format": "󰤨 {essid}",
-        "format-disconnected": "󰤭 déconnecté",
-        "tooltip": false,
-        "on-click": "kitty -e nmtui"
+        "format-disconnected": "󰤭",
+        "tooltip-format": "{ipAddr}"
     },
 
     "battery": {
@@ -50,11 +69,5 @@
 
     "tray": {
         "spacing": 8
-    },
-
-     "custom/power": {
-    "format": "󰐥",
-    "on-click": "wlogout -b 3 -c 0 -r 0 -m 0 --css ~/.config/wlogout/style.css --layout ~/.config/wlogout/layout",
-    "tooltip": false
-   }
+    }
 }
