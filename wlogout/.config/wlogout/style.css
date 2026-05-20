@@ -36,17 +36,17 @@ button:focus {
 }
 
 #lock {
-    background-image: image(url("/usr/share/wlogout/icons/lock.png"));
+    background-image: image(url("/home/joe/.config/wlogout/icons/lock.svg"));
 }
 
 #logout {
-    background-image: image(url("/usr/share/wlogout/icons/logout.png"));
+    background-image: image(url("/home/joe/.config/wlogout/icons/logout.svg"));
 }
 
 #shutdown {
-    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"));
+    background-image: image(url("/home/joe/.config/wlogout/icons/shutdown.svg"));
 }
 
 #reboot {
-    background-image: image(url("/usr/share/wlogout/icons/reboot.png"));
+    background-image: image(url("/home/joe/.config/wlogout/icons/reboot.svg"));
 }
