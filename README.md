@@ -1,14 +1,21 @@
 <div align="center">
 
-# 🔮 Grimoire
+```
+ ██████╗ ██████╗ ██╗███╗   ███╗ ██████╗ ██╗██████╗ ███████╗
+██╔════╝ ██╔══██╗██║████╗ ████║██╔═══██╗██║██╔══██╗██╔════╝
+██║  ███╗██████╔╝██║██╔████╔██║██║   ██║██║██████╔╝█████╗
+██║   ██║██╔══██╗██║██║╚██╔╝██║██║   ██║██║██╔══██╗██╔══╝
+╚██████╔╝██║  ██║██║██║ ╚═╝ ██║╚██████╔╝██║██║  ██║███████╗
+ ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝╚═╝  ╚═╝╚══════╝
+```
 
-### Un grimoire Hyprland pour la communauté francophone
+### Un grimoire Hyprland pour la communauté francophone 🔮
 
-![Version](https://img.shields.io/badge/version-1.0.0-e0789a?style=for-the-badge)
-![Hyprland](https://img.shields.io/badge/Hyprland-0.55-bd93f9?style=for-the-badge)
-![Lua](https://img.shields.io/badge/config-Lua-ffb86c?style=for-the-badge)
-![Licence](https://img.shields.io/badge/licence-MIT-69ff94?style=for-the-badge)
-![Langue](https://img.shields.io/badge/langue-Français-e0789a?style=for-the-badge)
+[![Version](https://img.shields.io/badge/version-1.1.0-e0789a?style=for-the-badge)](https://github.com/jonathanbourriauddev/grimoire)
+[![Hyprland](https://img.shields.io/badge/Hyprland-0.55-bd93f9?style=for-the-badge)](https://hyprland.org)
+[![Lua](https://img.shields.io/badge/config-Lua-ffb86c?style=for-the-badge)](https://lua.org)
+[![Licence](https://img.shields.io/badge/licence-MIT-69ff94?style=for-the-badge)](./LICENSE)
+[![Langue](https://img.shields.io/badge/langue-Français-e0789a?style=for-the-badge)](#)
 
 </div>
 
@@ -18,22 +25,33 @@
 
 **Grimoire** est une configuration Hyprland complète, écrite entièrement en **Lua**, documentée en français et pensée pour la communauté francophone Linux.
 
-Inspiré par [ML4W](https://github.com/mylinuxforwork/dotfiles), [End4](https://github.com/end-4/dots-hyprland), [Omarchy](https://github.com/basecamp/omarchy) et [TypeCraft](https://www.youtube.com/@typecraft_dev), Grimoire propose une expérience cohérente et moderne avec le thème **Dracula Warm** — une variation chaude et unique du célèbre thème Dracula.
+Inspiré par [ML4W](https://github.com/mylinuxforwork/dotfiles), [End4](https://github.com/end-4/dots-hyprland), [Omarchy](https://github.com/basecamp/omarchy) et [TypeCraft](https://www.youtube.com/@typecraft_dev), Grimoire propose une expérience cohérente et moderne avec le thème **Grimoire** — tons chauds sombres, rose-violet et orange.
+
+> Testé sur **CachyOS** (fresh install sans DE) — Dell Vostro 15 5501, Intel i5-1035G1, Intel Iris Plus.
+
+---
 
 ## ✨ Stack
 
-| Composant | Outil |
-|---|---|
-| Compositeur | Hyprland 0.55 (Lua) |
-| Barre | Waybar |
-| Terminal | Kitty |
-| Shell | Fish + Starship |
-| Launcher | Rofi |
-| Notifications | SwayNC |
-| Éditeur | Neovim + LazyVim |
-| Wallpaper | Hyprpaper |
-| Fetch | Fastfetch |
-| Distro | CachyOS / Arch Linux |
+| Composant     | Outil                    |
+| ------------- | ------------------------ |
+| Compositeur   | Hyprland 0.55 (Lua)      |
+| Barre         | Waybar                   |
+| Terminal      | Kitty                    |
+| Shell         | Fish + Starship          |
+| Launcher      | Rofi                     |
+| Notifications | SwayNC                   |
+| Éditeur       | Neovim + LazyVim         |
+| Wallpaper     | Hyprpaper                |
+| Fetch         | Fastfetch                |
+| Lock          | Hyprlock                 |
+| Idle          | Hypridle                 |
+| Logout        | Wlogout                  |
+| Bluetooth     | Bluez + Blueman          |
+| Dotfiles      | GNU Stow                 |
+| Distro        | CachyOS / Arch Linux     |
+
+---
 
 ## 🚀 Installation
 
@@ -42,94 +60,171 @@ Inspiré par [ML4W](https://github.com/mylinuxforwork/dotfiles), [End4](https://
 - Arch Linux ou CachyOS
 - Connexion internet
 - Droits sudo
+- Git installé
 
 ### Installation automatique
 
 ```bash
-git clone git@github.com:jonathanbourriauddev/grimoire.git ~/dotfiles
+git clone https://github.com/jonathanbourriauddev/grimoire.git ~/dotfiles
 cd ~/dotfiles
 chmod +x install.sh
 ./install.sh
 ```
 
+Le script :
+- Détecte automatiquement votre helper AUR (paru / yay, ou l'installe)
+- Installe tous les paquets nécessaires
+- Déploie les dotfiles via GNU Stow
+- Configure Fish comme shell par défaut
+- Installe les thèmes SDDM, GRUB et GTK
+- Active Bluetooth et SDDM
+
 ### Installation manuelle
 
 ```bash
-git clone git@github.com:jonathanbourriauddev/grimoire.git ~/dotfiles
+git clone https://github.com/jonathanbourriauddev/grimoire.git ~/dotfiles
 cd ~/dotfiles
-stow hypr waybar kitty rofi fish starship swaync fastfetch hyprpaper nvim
+stow hypr waybar kitty rofi fish starship swaync fastfetch \
+     hyprpaper hyprlock hypridle wlogout nvim
 chsh -s /usr/bin/fish
 ```
 
+---
+
 ## ⌨️ Raccourcis
 
-| Raccourci | Action |
-|---|---|
-| `SUPER + Entrée` | Terminal (Kitty) |
-| `SUPER + R` | Launcher (Rofi) |
-| `SUPER + C` | Fermer la fenêtre |
-| `SUPER + W` | Sélecteur de wallpaper |
-| `SUPER + F` | Plein écran |
-| `SUPER + V` | Fenêtre flottante |
-| `SUPER + B` | Navigateur |
-| `SUPER + SHIFT + Q` | Menu de déconnexion |
-| `SUPER + 1-5` | Changer de workspace |
-| `Print` | Capture région → presse-papier |
-| `SHIFT + Print` | Capture région → fichier |
+| Raccourci           | Action                          |
+| ------------------- | ------------------------------- |
+| `SUPER + Entrée`    | Terminal (Kitty)                |
+| `SUPER + R`         | Launcher (Rofi)                 |
+| `SUPER + C`         | Fermer la fenêtre               |
+| `SUPER + W`         | Sélecteur de wallpaper          |
+| `SUPER + F`         | Plein écran                     |
+| `SUPER + V`         | Fenêtre flottante               |
+| `SUPER + B`         | Navigateur (Brave)              |
+| `SUPER + L`         | Verrouiller (Hyprlock)          |
+| `SUPER + SHIFT + Q` | Menu de déconnexion (Wlogout)   |
+| `SUPER + 1-5`       | Changer de workspace            |
+| `Print`             | Capture région → presse-papier  |
+| `SHIFT + Print`     | Capture région → fichier        |
 
-## 🎨 Thème — Dracula Warm
+---
 
-| Couleur | Hex | Usage |
-|---|---|---|
-| Background | `#221a1a` | Fond principal |
-| Surface | `#2d2020` | Surfaces |
-| Primary | `#e0789a` | Accent rose-violet |
-| Secondary | `#ffb86c` | Orange |
-| Text | `#f8f8f2` | Texte |
-| Cyan | `#a4ffff` | Info |
-| Green | `#69ff94` | Succès |
+## 🎨 Thème Grimoire
+
+| Variable    | Hex         | Usage              |
+| ----------- | ----------- | ------------------ |
+| `base`      | `#221a1a`   | Fond principal     |
+| `surface`   | `#2d2020`   | Surfaces           |
+| `primary`   | `#e0789a`   | Rose-violet chaud  |
+| `secondary` | `#ffb86c`   | Orange             |
+| `tertiary`  | `#ff6e6e`   | Rouge-rose         |
+| `text`      | `#f8f8f2`   | Texte              |
+| `cyan`      | `#a4ffff`   | Info               |
+| `green`     | `#69ff94`   | Succès             |
+| `purple`    | `#bd93f9`   | Violet             |
+
+---
+
+## 📺 Multi-moniteurs
+
+Grimoire supporte nativement la configuration double écran :
+
+| Écran          | Résolution    | Position  |
+| -------------- | ------------- | --------- |
+| eDP-1 (laptop) | 1920×1080@60  | Bas       |
+| HDMI-A-1       | 1920×1200@60  | Au-dessus |
+
+La configuration est dans `hypr/.config/hypr/lua/monitors.lua`.
+
+---
 
 ## 📁 Structure
 
+```
 dotfiles/
-├── hypr/          # Hyprland (Lua) — config modulaire
-│   └── .config/hypr/
-│       ├── hyprland.lua   # point d'entrée
-│       └── lua/           # modules
-│           ├── colors.lua
-│           ├── keybinds.lua
-│           ├── look.lua
-│           ├── input.lua
-│           ├── monitors.lua
-│           ├── autostart.lua
-│           ├── rules.lua
-│           └── env.lua
-├── waybar/        # Barre de statut
-├── kitty/         # Terminal
-├── rofi/          # Launcher
-├── fish/          # Shell
-├── starship/      # Prompt
-├── swaync/        # Notifications
-├── fastfetch/     # Fetch
-├── nvim/          # Neovim + LazyVim
-├── hyprpaper/     # Wallpaper
-├── themes/        # Palettes de couleurs
-├── scripts/       # Scripts utilitaires
-├── docs/          # Documentation
-└── install.sh     # Installateur
+├── hypr/.config/hypr/          # Hyprland (Lua) — config modulaire
+│   ├── hyprland.lua            # point d'entrée
+│   └── lua/
+│       ├── colors.lua
+│       ├── keybinds.lua
+│       ├── look.lua
+│       ├── input.lua
+│       ├── monitors.lua
+│       ├── autostart.lua
+│       ├── rules.lua
+│       └── env.lua
+├── waybar/.config/waybar/      # Barre de statut
+├── kitty/.config/kitty/        # Terminal
+├── rofi/.config/rofi/          # Launcher
+├── fish/.config/fish/          # Shell
+├── starship/.config/           # Prompt
+├── swaync/.config/swaync/      # Notifications
+├── fastfetch/.config/fastfetch/# Fetch
+├── nvim/.config/nvim/          # Neovim + LazyVim
+├── hyprpaper/.config/hypr/     # Wallpaper
+├── hyprlock/.config/hypr/      # Verrouillage
+├── hypridle/.config/hypr/      # Idle
+├── wlogout/.config/wlogout/    # Logout
+├── themes/
+│   ├── grimoire-sddm/          # Thème SDDM
+│   ├── grimoire-grub/          # Thème GRUB
+│   └── Grimoire/               # Thème GTK
+├── scripts/
+│   ├── wallpaper.sh
+│   ├── lock.sh
+│   ├── wlogout.sh
+│   └── start-hyprpaper.sh
+├── docs/
+│   └── ROADMAP.md
+├── install.sh                  # Installateur automatique
+└── README.md
+```
+
+---
 
 ## 🗺️ Roadmap
 
-- [x] V1 — Fondations (config Lua modulaire, Dracula Warm, install.sh)
-- [ ] V1.1 — Polish (keybinds, gaps, wallpapers, wlogout, hypridle)
-- [ ] V2 — Modernisation (AGS/Astal, Ghostty, thèmes multiples, swww)
-- [ ] V3 — Communauté (site vitrine, Discord francophone)
+### V1.1 — Polish ✅
+- [x] Thème SDDM Grimoire
+- [x] Thème GRUB Grimoire
+- [x] Renommage complet Dracula Warm → Grimoire
+- [x] Icônes Wlogout custom
+- [x] Support second écran HDMI-A-1
+- [x] Script `install.sh` automatique
+
+### V2 — Modernisation
+- [ ] Waybar → AGS / Astal
+- [ ] Kitty → Ghostty
+- [ ] Hyprpaper → swww
+- [ ] Shell Fish → ZSH
+- [ ] Installateur TUI interactif
+- [ ] Thèmes switchables
+
+### V3 — Communauté
+- [ ] Site vitrine
+- [ ] Discord francophone
+- [ ] Logo et identité visuelle complète
+
+---
+
+## 🔧 Notes techniques
+
+- **Hyprpaper** : nécessite `start-hyprpaper.sh` avec `sleep 2` + `hyprctl hyprpaper wallpaper` pour chaque moniteur
+- **Hyprpaper.conf** : attention aux CRLF qui cassent le parsing — toujours éditer avec `nvim` ou `python3`
+- **Wlogout** : grille 2×2 via `-b 2`, icônes SVG convertis en PNG via `python-cairosvg`
+- **SDDM** : erreur `placeholderText` corrigée dans le thème
+- **Stow** : peut nécessiter `rm -rf ~/.config/<app>` avant le stow si la config cible existe déjà
+
+---
 
 ## 👤 Auteur
 
 **Jonathan Bourriaud** — [@jonathanbourriauddev](https://github.com/jonathanbourriauddev)
 
 Technicien réseau & développeur fullstack — side project passion.
+
+---
 
 ## 📄 Licence
 
