@@ -5,7 +5,7 @@
 local mainMod = "SUPER"
 
 local terminal = "kitty"
-local fileManager = "dolphin"
+local fileManager = "thunar"
 local menu = "rofi -show drun"
 local browser = "brave"
 local wlogout_cmd = "wlogout --protocol layer-shell -b 5 -T 400 -B 400 --css ~/.config/wlogout/style.css"
@@ -14,7 +14,7 @@ local wlogout_cmd = "wlogout --protocol layer-shell -b 5 -T 400 -B 400 --css ~/.
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
