@@ -7,14 +7,16 @@
 - Hyprlock, Hypridle, Wlogout
 - install.sh + README
 
-## V1.1 — Polish (en cours)
-- [ ] Renommer le thème "Dracula Warm" → "Grimoire" partout
-- [ ] Icônes wlogout custom aux couleurs Grimoire
-- [ ] Wallpapers + sélecteur Rofi
-- [ ] Retravailler les keybinds
-- [ ] Ajuster gaps/animations
-- [ ] Config modulaire — peaufiner les modules Lua
-- [ ] Migrer vers ZSH
+## V1.1 — Polish ✅
+- [x] Renommage complet Dracula Warm → Grimoire
+- [x] Icônes Wlogout custom aux couleurs Grimoire
+- [x] Wallpapers + sélecteur Rofi
+- [x] Support second écran HDMI-A-1
+- [x] Script `install.sh` automatique
+- [x] README v1.1.0
+- [x] Tag v1.1.0
+- [x] Thème curseur Grimoire (`phinger-cursors-grimoire`)
+- [ ] Keybinds finalisés (en cours)
 
 ## V2 — Modernisation
 - [ ] Waybar → AGS/Astal
@@ -23,6 +25,7 @@
 - [ ] Installateur TUI interactif
 - [ ] Système de thèmes switchables
 - [ ] Zellij au démarrage propre
+- [ ] Curseur Grimoire v2 — rebuild Figma natif (pixel perfect toutes tailles)
 
 ## V3 — Communauté
 - [ ] Site vitrine Grimoire
