@@ -31,4 +31,4 @@
 - [ ] Site vitrine Grimoire
 - [ ] Discord francophone
 - [ ] Contributions ouvertes
-- [ ] Logo et identité visuelle complète
+- [x ] Logo et identité visuelle complète
