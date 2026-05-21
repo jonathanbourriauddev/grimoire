@@ -1,17 +1,14 @@
 <div align="center">
-
-```
- ██████╗ ██████╗ ██╗███╗   ███╗ ██████╗ ██╗██████╗ ███████╗
+  ██████╗ ██████╗ ██╗███╗   ███╗ ██████╗ ██╗██████╗ ███████╗
 ██╔════╝ ██╔══██╗██║████╗ ████║██╔═══██╗██║██╔══██╗██╔════╝
 ██║  ███╗██████╔╝██║██╔████╔██║██║   ██║██║██████╔╝█████╗
 ██║   ██║██╔══██╗██║██║╚██╔╝██║██║   ██║██║██╔══██╗██╔══╝
 ╚██████╔╝██║  ██║██║██║ ╚═╝ ██║╚██████╔╝██║██║  ██║███████╗
- ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝╚═╝  ╚═╝╚══════╝
-```
+╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝╚═╝  ╚═╝╚══════╝
 
 ### Un grimoire Hyprland pour la communauté francophone 🔮
 
-[![Version](https://img.shields.io/badge/version-1.1.0-e0789a?style=for-the-badge)](https://github.com/jonathanbourriauddev/grimoire)
+[![Version](https://img.shields.io/badge/version-1.1.1-e0789a?style=for-the-badge)](https://github.com/jonathanbourriauddev/grimoire)
 [![Hyprland](https://img.shields.io/badge/Hyprland-0.55-bd93f9?style=for-the-badge)](https://hyprland.org)
 [![Lua](https://img.shields.io/badge/config-Lua-ffb86c?style=for-the-badge)](https://lua.org)
 [![Licence](https://img.shields.io/badge/licence-MIT-69ff94?style=for-the-badge)](./LICENSE)
@@ -87,42 +84,49 @@ cd ~/dotfiles
 stow hypr waybar kitty rofi fish starship swaync fastfetch \
      hyprpaper hyprlock hypridle wlogout nvim
 chsh -s /usr/bin/fish
+echo "kitty.desktop" > ~/.config/xdg-terminals.list
 ```
 
 ---
 
 ## ⌨️ Raccourcis
 
-| Raccourci           | Action                          |
-| ------------------- | ------------------------------- |
-| `SUPER + Entrée`    | Terminal (Kitty)                |
-| `SUPER + R`         | Launcher (Rofi)                 |
-| `SUPER + C`         | Fermer la fenêtre               |
-| `SUPER + W`         | Sélecteur de wallpaper          |
-| `SUPER + F`         | Plein écran                     |
-| `SUPER + V`         | Fenêtre flottante               |
-| `SUPER + B`         | Navigateur (Brave)              |
-| `SUPER + L`         | Verrouiller (Hyprlock)          |
-| `SUPER + SHIFT + Q` | Menu de déconnexion (Wlogout)   |
-| `SUPER + 1-5`       | Changer de workspace            |
-| `Print`             | Capture région → presse-papier  |
-| `SHIFT + Print`     | Capture région → fichier        |
+| Raccourci                  | Action                         |
+| -------------------------- | ------------------------------ |
+| `SUPER + Entrée`           | Terminal (Kitty)               |
+| `SUPER + Space`            | Launcher (Rofi)                |
+| `SUPER + Q`                | Fermer la fenêtre              |
+| `SUPER + E`                | Gestionnaire de fichiers       |
+| `SUPER + W`                | Sélecteur de wallpaper         |
+| `SUPER + F`                | Plein écran                    |
+| `SUPER + V`                | Fenêtre flottante              |
+| `SUPER + P`                | Fenêtre pseudo-tiled           |
+| `SUPER + B`                | Navigateur (Brave)             |
+| `SUPER + L`                | Verrouiller (Hyprlock)         |
+| `SUPER + SHIFT + Q`        | Menu déconnexion (Wlogout)     |
+| `SUPER + ←↑↓→`             | Focus fenêtre                  |
+| `SUPER + SHIFT + ←↑↓→`     | Déplacer la fenêtre            |
+| `SUPER + & é " ' ( - è _ ç à` | Changer de workspace (AZERTY) |
+| `SUPER + SHIFT + & é …`    | Déplacer vers workspace        |
+| `Print`                    | Capture région → presse-papier |
+| `SHIFT + Print`            | Capture région → fichier       |
+| `SUPER + Print`            | Capture écran → presse-papier  |
 
 ---
 
 ## 🎨 Thème Grimoire
 
-| Variable    | Hex         | Usage              |
-| ----------- | ----------- | ------------------ |
-| `base`      | `#221a1a`   | Fond principal     |
-| `surface`   | `#2d2020`   | Surfaces           |
-| `primary`   | `#e0789a`   | Rose-violet chaud  |
-| `secondary` | `#ffb86c`   | Orange             |
-| `tertiary`  | `#ff6e6e`   | Rouge-rose         |
-| `text`      | `#f8f8f2`   | Texte              |
-| `cyan`      | `#a4ffff`   | Info               |
-| `green`     | `#69ff94`   | Succès             |
-| `purple`    | `#bd93f9`   | Violet             |
+| Variable    | Hex       | Usage             |
+| ----------- | --------- | ----------------- |
+| `base`      | `#221a1a` | Fond principal    |
+| `surface`   | `#2d2020` | Surfaces          |
+| `primary`   | `#e0789a` | Rose-violet chaud |
+| `secondary` | `#ffb86c` | Orange            |
+| `tertiary`  | `#ff6e6e` | Rouge-rose        |
+| `text`      | `#f8f8f2` | Texte             |
+| `cyan`      | `#a4ffff` | Info              |
+| `green`     | `#69ff94` | Succès            |
+| `purple`    | `#bd93f9` | Violet            |
 
 ---
 
@@ -130,10 +134,10 @@ chsh -s /usr/bin/fish
 
 Grimoire supporte nativement la configuration double écran :
 
-| Écran          | Résolution    | Position  |
-| -------------- | ------------- | --------- |
-| eDP-1 (laptop) | 1920×1080@60  | Bas       |
-| HDMI-A-1       | 1920×1200@60  | Au-dessus |
+| Écran          | Résolution   | Position  |
+| -------------- | ------------ | --------- |
+| eDP-1 (laptop) | 1920×1080@60 | Bas       |
+| HDMI-A-1       | 1920×1200@60 | Au-dessus |
 
 La configuration est dans `hypr/.config/hypr/lua/monitors.lua`.
 
@@ -141,10 +145,9 @@ La configuration est dans `hypr/.config/hypr/lua/monitors.lua`.
 
 ## 📁 Structure
 
-```
 dotfiles/
-├── hypr/.config/hypr/          # Hyprland (Lua) — config modulaire
-│   ├── hyprland.lua            # point d'entrée
+├── hypr/.config/hypr/           # Hyprland (Lua) — config modulaire
+│   ├── hyprland.lua             # point d'entrée
 │   └── lua/
 │       ├── colors.lua
 │       ├── keybinds.lua
@@ -154,32 +157,34 @@ dotfiles/
 │       ├── autostart.lua
 │       ├── rules.lua
 │       └── env.lua
-├── waybar/.config/waybar/      # Barre de statut
-├── kitty/.config/kitty/        # Terminal
-├── rofi/.config/rofi/          # Launcher
-├── fish/.config/fish/          # Shell
-├── starship/.config/           # Prompt
-├── swaync/.config/swaync/      # Notifications
-├── fastfetch/.config/fastfetch/# Fetch
-├── nvim/.config/nvim/          # Neovim + LazyVim
-├── hyprpaper/.config/hypr/     # Wallpaper
-├── hyprlock/.config/hypr/      # Verrouillage
-├── hypridle/.config/hypr/      # Idle
-├── wlogout/.config/wlogout/    # Logout
+├── waybar/.config/waybar/       # Barre de statut
+├── kitty/.config/kitty/         # Terminal
+├── rofi/.config/rofi/           # Launcher
+├── fish/.config/fish/           # Shell
+├── starship/.config/            # Prompt
+├── swaync/.config/swaync/       # Notifications
+├── fastfetch/.config/fastfetch/ # Fetch
+├── nvim/.config/nvim/           # Neovim + LazyVim
+├── hyprpaper/.config/hypr/      # Wallpaper
+├── hyprlock/.config/hypr/       # Verrouillage
+├── hypridle/.config/hypr/       # Idle
+├── wlogout/.config/wlogout/     # Logout
 ├── themes/
-│   ├── grimoire-sddm/          # Thème SDDM
-│   ├── grimoire-grub/          # Thème GRUB
-│   └── Grimoire/               # Thème GTK
+│   ├── grimoire-sddm/           # Thème SDDM
+│   ├── grimoire-grub/           # Thème GRUB
+│   ├── Grimoire/                # Thème GTK
+│   └── grimoire-cursors/        # Thème curseur
+├── wallpapers/                  # Fonds d'écran Grimoire
 ├── scripts/
 │   ├── wallpaper.sh
 │   ├── lock.sh
 │   ├── wlogout.sh
-│   └── start-hyprpaper.sh
+│   ├── start-hyprpaper.sh
+│   └── build-grimoire-cursors-v2.sh
 ├── docs/
 │   └── ROADMAP.md
-├── install.sh                  # Installateur automatique
+├── install.sh                   # Installateur automatique
 └── README.md
-```
 
 ---
 
@@ -193,6 +198,8 @@ dotfiles/
 - [x] Support second écran HDMI-A-1
 - [x] Script `install.sh` automatique
 - [x] Thème curseur Grimoire (`phinger-cursors-grimoire`)
+- [x] Keybinds finalisés (AZERTY codes, déplacement fenêtres)
+- [x] xdg-terminals.list configuré (Kitty)
 
 ### V2 — Modernisation
 - [ ] Waybar → AGS / Astal
@@ -216,6 +223,8 @@ dotfiles/
 - **Hyprpaper.conf** : attention aux CRLF qui cassent le parsing — toujours éditer avec `nvim` ou `python3`
 - **Wlogout** : grille 2×2 via `-b 2`, icônes SVG convertis en PNG via `python-cairosvg`
 - **SDDM** : erreur `placeholderText` corrigée dans le thème
+- **Keybinds AZERTY** : utilise `code:10` à `code:19` pour les workspaces, compatible toutes dispositions clavier
+- **xdg-terminals.list** : `~/.config/xdg-terminals.list` pointe sur `kitty.desktop`
 - **Stow** : peut nécessiter `rm -rf ~/.config/<app>` avant le stow si la config cible existe déjà
 
 ---
