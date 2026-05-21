@@ -758,15 +758,11 @@ setup_cursors() {
     step "Installation du thème curseur Grimoire"
     set +e
 
-    local script="$DOTFILES_DIR/scripts/build-grimoire-cursors-v2.sh"
+    local script_v1="$DOTFILES_DIR/scripts/build-grimoire-cursors.sh"
+    local script_v2="$DOTFILES_DIR/scripts/build-grimoire-cursors-v2.sh"
+    local cursor_source="$HOME/.cache/grimoire-cursors-build/themes/phinger-cursors-gruvbox-material"
 
-    if [[ ! -f "$script" ]]; then
-        warn "Script curseur introuvable : $script — ignoré"
-        set -e
-        return
-    fi
-
-    # Vérifier xcur2png ET xorg-xcursorgen avant d'exécuter
+    # Vérifier les dépendances
     for dep in xcur2png xcursorgen; do
         if ! command -v "$dep" &>/dev/null; then
             warn "$dep non disponible, tentative d'installation..."
@@ -778,11 +774,43 @@ setup_cursors() {
         fi
     done
 
-    info "Construction du thème curseur phinger-cursors-grimoire..."
-    if bash "$script" >> "$LOG_FILE" 2>&1; then
-        success "Thème curseur Grimoire installé dans ~/.local/share/icons/"
+    # Étape 1 : lancer v1 pour télécharger la source si absente
+    if [[ ! -d "$cursor_source" ]]; then
+        if [[ ! -f "$script_v1" ]]; then
+            warn "Script curseur v1 introuvable — impossible de télécharger la source"
+            set -e
+            return
+        fi
+        info "Téléchargement de la source curseur via v1..."
+        if bash "$script_v1" >> "$LOG_FILE" 2>&1; then
+            success "Source curseur téléchargée"
+        else
+            error "Échec du téléchargement de la source curseur"
+            set -e
+            return
+        fi
     else
-        error "Échec de la construction du thème curseur — voir le log"
+        info "Source curseur déjà présente — skip v1"
+    fi
+
+    # Étape 2 : lancer v2 pour la recoloration Grimoire
+    if [[ ! -f "$script_v2" ]]; then
+        warn "Script curseur v2 introuvable — ignoré"
+        set -e
+        return
+    fi
+
+    info "Recoloration Grimoire via v2..."
+    if bash "$script_v2" >> "$LOG_FILE" 2>&1; then
+        success "Thème curseur Grimoire installé dans ~/.local/share/icons/"
+        # Copier aussi dans /usr/share/icons pour SDDM
+        if [[ -d "$HOME/.local/share/icons/phinger-cursors-grimoire" ]]; then
+            sudo cp -r "$HOME/.local/share/icons/phinger-cursors-grimoire" /usr/share/icons/ >> "$LOG_FILE" 2>&1 && \
+            success "Curseur copié dans /usr/share/icons/ pour SDDM" || \
+            warn "Impossible de copier dans /usr/share/icons/ — SDDM utilisera le curseur par défaut"
+        fi
+    else
+        error "Échec de la recoloration curseur — voir le log"
     fi
 
     set -e
