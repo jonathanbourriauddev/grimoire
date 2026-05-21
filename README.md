@@ -200,7 +200,7 @@ dotfiles/
 - [x] Thème curseur Grimoire (`phinger-cursors-grimoire`)
 - [x] Keybinds finalisés (AZERTY codes, déplacement fenêtres)
 - [x] xdg-terminals.list configuré (Kitty)
-- [ ] Fenêtres flottante a finir de Configurer
+- [ ] Fenêtres flottantes à finir de Configurer
 
 ### V2 — Modernisation
 - [ ] Waybar → AGS / Astal
