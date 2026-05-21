@@ -222,7 +222,7 @@ install_paru() {
             success "paru installé avec succès"
             AUR_HELPER="paru"
         else
-            fatal "Impossible d'installer paru. Installez yay ou paru manuellement."
+            fatal "Impossible d'installer yay ou paru. Installez l'un d'eux manuellement."
         fi
         popd > /dev/null
     else
@@ -285,6 +285,8 @@ install_packages() {
         playerctl
         # GTK
         nwg-look
+        # Gestionnaire de fichiers
+        thunar
         # SDDM & dépendances QML
         sddm
         qt5-quickcontrols2
@@ -292,6 +294,7 @@ install_packages() {
         qt5-svg
         # Curseurs
         imagemagick
+        xorg-xcursorgen
         # Multi-boot
         os-prober
         # Dépendances
@@ -418,15 +421,15 @@ setup_shell() {
         fi
 
         # Définir fish comme shell par défaut
-        if [[ "$SHELL" != "$fish_path" ]]; then
+        if [[ "$SHELL" == "$fish_path" ]]; then
+            success "Fish est déjà le shell par défaut"
+        else
             info "Définition de fish comme shell par défaut..."
             if chsh -s "$fish_path" >> "$LOG_FILE" 2>&1; then
                 success "Shell par défaut → fish"
             else
-                error "Impossible de changer le shell par défaut"
+                warn "Impossible de changer le shell (peut-être déjà fish sur CachyOS)"
             fi
-        else
-            success "Fish est déjà le shell par défaut"
         fi
     else
         error "Fish n'est pas installé, shell non modifié"
@@ -463,6 +466,9 @@ setup_sddm() {
     sudo tee /etc/sddm.conf.d/grimoire.conf > /dev/null <<EOF
 [Theme]
 Current=grimoire-sddm
+
+[General]
+Numlock=on
 EOF
 
     # Activer le service SDDM
@@ -505,28 +511,135 @@ setup_grub() {
     local theme_line="GRUB_THEME=\"${grub_theme_dst}/theme.txt\""
 
     if grep -q "^GRUB_THEME=" "$grub_conf"; then
-        sudo sed -i "s|^GRUB_THEME=.*|${theme_line}|" "$grub_conf" >> "$LOG_FILE" 2>&1
+        sudo sed -i "s|^GRUB_THEME=.*|${theme_line}|" "$grub_conf"
     else
         echo "$theme_line" | sudo tee -a "$grub_conf" > /dev/null
     fi
 
-    # Régénérer grub.cfg
-    info "Régénération de grub.cfg..."
-
-    # Activer os-prober pour détecter les autres OS (dual boot)
-    local grub_conf="/etc/default/grub"
+    # Activer os-prober pour le dual boot
     if grep -q "^#GRUB_DISABLE_OS_PROBER" "$grub_conf" 2>/dev/null; then
         sudo sed -i "s|^#GRUB_DISABLE_OS_PROBER.*|GRUB_DISABLE_OS_PROBER=false|" "$grub_conf"
-        info "os-prober activé dans /etc/default/grub"
     elif ! grep -q "^GRUB_DISABLE_OS_PROBER" "$grub_conf" 2>/dev/null; then
         echo "GRUB_DISABLE_OS_PROBER=false" | sudo tee -a "$grub_conf" > /dev/null
-        info "os-prober ajouté dans /etc/default/grub"
+    fi
+    info "os-prober activé dans /etc/default/grub"
+
+    # Détecter et monter les partitions EFI des autres disques pour os-prober
+    info "Détection des autres disques pour le dual boot..."
+    local current_root
+    current_root=$(findmnt -n -o SOURCE /)
+    local current_disk
+    current_disk=$(lsblk -no PKNAME "$current_root" 2>/dev/null | head -1)
+
+    local tmp_efi
+    tmp_efi=$(mktemp -d)
+    local other_efi_mounted=false
+
+    while IFS= read -r efi_part; do
+        local efi_disk
+        efi_disk=$(lsblk -no PKNAME "$efi_part" 2>/dev/null | head -1)
+        if [[ "$efi_disk" != "$current_disk" ]]; then
+            info "Montage de la partition EFI : $efi_part"
+            if sudo mount "$efi_part" "$tmp_efi" >> "$LOG_FILE" 2>&1; then
+                other_efi_mounted=true
+            fi
+        fi
+    done < <(lsblk -rno NAME,FSTYPE | awk '$2=="vfat"{print "/dev/"$1}')
+
+    # Lancer os-prober
+    local os_prober_result
+    os_prober_result=$(sudo os-prober 2>/dev/null || true)
+    log "os-prober résultat : $os_prober_result"
+
+    # Démonter les partitions EFI temporaires
+    if [[ "$other_efi_mounted" == true ]]; then
+        sudo umount "$tmp_efi" >> "$LOG_FILE" 2>&1 || true
+    fi
+    rm -rf "$tmp_efi"
+
+    # Si os-prober n'a rien trouvé, ajouter les entrées manuellement via 40_custom
+    if [[ -z "$os_prober_result" ]]; then
+        warn "os-prober n'a rien détecté — ajout manuel des entrées btrfs dans 40_custom"
+        setup_grub_custom_entries
+    else
+        success "os-prober a détecté : $os_prober_result"
     fi
 
+    # Régénérer grub.cfg
+    info "Régénération de grub.cfg..."
     if sudo grub-mkconfig -o /boot/grub/grub.cfg >> "$LOG_FILE" 2>&1; then
         success "GRUB configuré avec le thème Grimoire"
     else
         error "Échec de la régénération de grub.cfg"
+    fi
+}
+
+setup_grub_custom_entries() {
+    local custom_file="/etc/grub.d/40_custom"
+    local current_root
+    current_root=$(findmnt -n -o SOURCE /)
+    local current_disk
+    current_disk=$(lsblk -no PKNAME "$current_root" 2>/dev/null | head -1)
+
+    local entries_added=0
+
+    # Chercher toutes les partitions btrfs qui ne sont pas le disque actuel
+    while IFS= read -r part; do
+        local part_disk
+        part_disk=$(lsblk -no PKNAME "$part" 2>/dev/null | head -1)
+
+        if [[ "$part_disk" == "$current_disk" ]]; then
+            continue
+        fi
+
+        local uuid
+        uuid=$(sudo blkid -s UUID -o value "$part" 2>/dev/null || true)
+        if [[ -z "$uuid" ]]; then
+            continue
+        fi
+
+        # Détecter le nom du kernel sur cette partition
+        local tmp_mnt
+        tmp_mnt=$(mktemp -d)
+        if sudo mount -o subvol=@ "$part" "$tmp_mnt" >> "$LOG_FILE" 2>&1; then
+            local kernel_name="vmlinuz-linux-cachyos"
+            local initrd_name="initramfs-linux-cachyos.img"
+
+            # Chercher le kernel réel
+            if [[ -d "$tmp_mnt/boot" ]]; then
+                local found_kernel
+                found_kernel=$(ls "$tmp_mnt/boot"/vmlinuz-* 2>/dev/null | head -1 | xargs basename 2>/dev/null || true)
+                if [[ -n "$found_kernel" ]]; then
+                    kernel_name="$found_kernel"
+                    initrd_name="initramfs-${kernel_name#vmlinuz-}.img"
+                fi
+            fi
+
+            sudo umount "$tmp_mnt" >> "$LOG_FILE" 2>&1 || true
+
+            local entry_label="CachyOS ($part_disk)"
+            info "Ajout entrée GRUB manuelle : $entry_label (UUID=$uuid)"
+
+            sudo tee -a "$custom_file" > /dev/null <<EOF
+
+menuentry '${entry_label}' {
+    insmod part_gpt
+    insmod btrfs
+    search --no-floppy --fs-uuid --set=root ${uuid}
+    linux /@/boot/${kernel_name} root=UUID=${uuid} rootflags=subvol=@ rw quiet splash
+    initrd /@/boot/${initrd_name}
+}
+EOF
+            entries_added=$((entries_added + 1))
+        fi
+        rm -rf "$tmp_mnt"
+
+    done < <(lsblk -rno NAME,FSTYPE | awk '$2=="btrfs"{print "/dev/"$1}')
+
+    if [[ $entries_added -gt 0 ]]; then
+        success "$entries_added entrée(s) GRUB ajoutée(s) manuellement dans 40_custom"
+    else
+        warn "Aucun autre disque btrfs détecté pour le dual boot"
     fi
 }
 
@@ -644,20 +757,27 @@ setup_cursors() {
         return
     fi
 
-    # xcur2png doit être installé AVANT d'exécuter le script
-    if ! command -v xcur2png &>/dev/null; then
-        warn "xcur2png non disponible, tentative d'installation..."
-        if ! $AUR_HELPER -S --noconfirm --needed xcur2png >> "$LOG_FILE" 2>&1; then
-            error "Impossible d'installer xcur2png — curseurs ignorés"
-            return
+    # Vérifier xcur2png ET xorg-xcursorgen avant d'exécuter
+    for dep in xcur2png xcursorgen; do
+        if ! command -v "$dep" &>/dev/null; then
+            warn "$dep non disponible, tentative d'installation..."
+            local pkg="xcur2png"
+            [[ "$dep" == "xcursorgen" ]] && pkg="xorg-xcursorgen"
+            if ! sudo pacman -S --noconfirm --needed "$pkg" >> "$LOG_FILE" 2>&1; then
+                if ! $AUR_HELPER -S --noconfirm --needed "$pkg" >> "$LOG_FILE" 2>&1; then
+                    error "Impossible d'installer $pkg — curseurs ignorés"
+                    return
+                fi
+            fi
         fi
-    fi
+    done
 
     info "Construction du thème curseur phinger-cursors-grimoire..."
     if bash "$script" >> "$LOG_FILE" 2>&1; then
         success "Thème curseur Grimoire installé dans ~/.local/share/icons/"
     else
-        error "Échec de la construction du thème curseur"
+        error "Échec de la construction du thème curseur — voir le log pour les détails"
+        bash "$script" 2>&1 | tail -5 | while read -r line; do log "CURSEUR: $line"; done
     fi
 }
 
@@ -669,13 +789,7 @@ setup_xdg_terminal() {
     step "Configuration de Kitty comme terminal par défaut"
 
     local xdg_conf="$HOME/.config/xdg-terminals.list"
-
     mkdir -p "$HOME/.config"
-
-    if [[ -f "$xdg_conf" ]]; then
-        info "xdg-terminals.list déjà présent, mise à jour..."
-    fi
-
     echo "kitty.desktop" > "$xdg_conf"
     success "Kitty défini comme terminal par défaut ($xdg_conf)"
 }
