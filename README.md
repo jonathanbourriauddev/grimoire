@@ -1,20 +1,20 @@
 <div align="center">
-  ██████╗ ██████╗ ██╗███╗   ███╗ ██████╗ ██╗██████╗ ███████╗
-██╔════╝ ██╔══██╗██║████╗ ████║██╔═══██╗██║██╔══██╗██╔════╝
-██║  ███╗██████╔╝██║██╔████╔██║██║   ██║██║██████╔╝█████╗
-██║   ██║██╔══██╗██║██║╚██╔╝██║██║   ██║██║██╔══██╗██╔══╝
-╚██████╔╝██║  ██║██║██║ ╚═╝ ██║╚██████╔╝██║██║  ██║███████╗
-╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝╚═╝  ╚═╝╚══════╝
+  <img src="assets/grimoire.png" width="200" />
 
-### Un grimoire Hyprland pour la communauté francophone 🔮
+  # GRIMOIRE 🔮
 
-[![Version](https://img.shields.io/badge/version-1.1.1-e0789a?style=for-the-badge)](https://github.com/jonathanbourriauddev/grimoire)
-[![Hyprland](https://img.shields.io/badge/Hyprland-0.55-bd93f9?style=for-the-badge)](https://hyprland.org)
-[![Lua](https://img.shields.io/badge/config-Lua-ffb86c?style=for-the-badge)](https://lua.org)
-[![Licence](https://img.shields.io/badge/licence-MIT-69ff94?style=for-the-badge)](./LICENSE)
-[![Langue](https://img.shields.io/badge/langue-Français-e0789a?style=for-the-badge)](#)
+  ### Un grimoire Hyprland pour la communauté francophone
 
+  [![Version](https://img.shields.io/badge/version-1.1.2-e0789a?style=for-the-badge)](https://github.com/jonathanbourriauddev/grimoire)
+  [![Hyprland](https://img.shields.io/badge/Hyprland-0.55-bd93f9?style=for-the-badge)](https://hyprland.org)
+  [![Lua](https://img.shields.io/badge/config-Lua-ffb86c?style=for-the-badge)](https://lua.org)
+  [![Licence](https://img.shields.io/badge/licence-MIT-69ff94?style=for-the-badge)](./LICENSE)
+  [![Langue](https://img.shields.io/badge/langue-Français-e0789a?style=for-the-badge)](#)
 </div>
+
+---
+
+> 🌍 **English speakers:** This project is a community-driven Hyprland configuration tailored for the Francophone community (hence the French documentation). However, the underlying architecture is highly modular and configured in Lua. Feel free to explore the code!
 
 ---
 
@@ -46,6 +46,7 @@ Inspiré par [ML4W](https://github.com/mylinuxforwork/dotfiles), [End4](https://
 | Logout        | Wlogout                  |
 | Bluetooth     | Bluez + Blueman          |
 | Dotfiles      | GNU Stow                 |
+| OSD           | SwayOSD                  |
 | Distro        | CachyOS / Arch Linux     |
 
 ---
@@ -91,26 +92,26 @@ echo "kitty.desktop" > ~/.config/xdg-terminals.list
 
 ## ⌨️ Raccourcis
 
-| Raccourci                  | Action                         |
-| -------------------------- | ------------------------------ |
-| `SUPER + Entrée`           | Terminal (Kitty)               |
-| `SUPER + Space`            | Launcher (Rofi)                |
-| `SUPER + Q`                | Fermer la fenêtre              |
-| `SUPER + E`                | Gestionnaire de fichiers       |
-| `SUPER + W`                | Sélecteur de wallpaper         |
-| `SUPER + F`                | Plein écran                    |
-| `SUPER + V`                | Fenêtre flottante              |
-| `SUPER + P`                | Fenêtre pseudo-tiled           |
-| `SUPER + B`                | Navigateur (Brave)             |
-| `SUPER + L`                | Verrouiller (Hyprlock)         |
-| `SUPER + SHIFT + Q`        | Menu déconnexion (Wlogout)     |
-| `SUPER + ←↑↓→`             | Focus fenêtre                  |
-| `SUPER + SHIFT + ←↑↓→`     | Déplacer la fenêtre            |
-| `SUPER + & é " ' ( - è _ ç à` | Changer de workspace (AZERTY) |
-| `SUPER + SHIFT + & é …`    | Déplacer vers workspace        |
-| `Print`                    | Capture région → presse-papier |
-| `SHIFT + Print`            | Capture région → fichier       |
-| `SUPER + Print`            | Capture écran → presse-papier  |
+| Raccourci                      | Action                         |
+| ------------------------------ | ------------------------------ |
+| `SUPER + Entrée`               | Terminal (Kitty)               |
+| `SUPER + Space`                | Launcher (Rofi)                |
+| `SUPER + Q`                    | Fermer la fenêtre              |
+| `SUPER + E`                    | Gestionnaire de fichiers       |
+| `SUPER + W`                    | Sélecteur de wallpaper         |
+| `SUPER + F`                    | Plein écran                    |
+| `SUPER + V`                    | Fenêtre flottante              |
+| `SUPER + P`                    | Fenêtre pseudo-tiled           |
+| `SUPER + B`                    | Navigateur (Brave)             |
+| `SUPER + L`                    | Verrouiller (Hyprlock)         |
+| `SUPER + SHIFT + Q`            | Menu déconnexion (Wlogout)     |
+| `SUPER + ←↑↓→`                 | Focus fenêtre                  |
+| `SUPER + SHIFT + ←↑↓→`         | Déplacer la fenêtre            |
+| `SUPER + & é " ' ( - è _ ç à` | Changer de workspace (AZERTY)  |
+| `SUPER + SHIFT + & é …`        | Déplacer vers workspace        |
+| `Print`                        | Capture région → presse-papier |
+| `SHIFT + Print`                | Capture région → fichier       |
+| `SUPER + Print`                | Capture écran → presse-papier  |
 
 ---
 
@@ -145,7 +146,9 @@ La configuration est dans `hypr/.config/hypr/lua/monitors.lua`.
 
 ## 📁 Structure
 
+```
 dotfiles/
+├── assets/                      # Images et ressources README
 ├── hypr/.config/hypr/           # Hyprland (Lua) — config modulaire
 │   ├── hyprland.lua             # point d'entrée
 │   └── lua/
@@ -163,7 +166,7 @@ dotfiles/
 ├── fish/.config/fish/           # Shell
 ├── starship/.config/            # Prompt
 ├── swaync/.config/swaync/       # Notifications
-├── fastfetch/.config/fastfetch/ # Fetch
+├── fastfetch/.config/fastfetch/ # Fetch (logo grimoire.png)
 ├── nvim/.config/nvim/           # Neovim + LazyVim
 ├── hyprpaper/.config/hypr/      # Wallpaper
 ├── hyprlock/.config/hypr/       # Verrouillage
@@ -179,28 +182,30 @@ dotfiles/
 │   ├── wallpaper.sh
 │   ├── lock.sh
 │   ├── wlogout.sh
-│   ├── start-hyprpaper.sh
-│   └── build-grimoire-cursors-v2.sh
-├── docs/
-│   └── ROADMAP.md
+│   └── start-hyprpaper.sh
 ├── install.sh                   # Installateur automatique
 └── README.md
+```
 
 ---
 
 ## 🗺️ Roadmap
 
-### V1.1 — Polish ✅
+### V1 — Polish ✅
 - [x] Thème SDDM Grimoire
 - [x] Thème GRUB Grimoire
 - [x] Renommage complet Dracula Warm → Grimoire
 - [x] Icônes Wlogout custom
 - [x] Support second écran HDMI-A-1
 - [x] Script `install.sh` automatique
-- [x] Thème curseur Grimoire (`phinger-cursors-grimoire`)
+- [x] Thème curseur Grimoire
 - [x] Keybinds finalisés (AZERTY codes, déplacement fenêtres)
 - [x] xdg-terminals.list configuré (Kitty)
-- [ ] Fenêtres flottantes à finir de Configurer
+- [x] Waybar : date + heure + scroll volume/luminosité (SwayOSD)
+- [x] Hypridle : verrouillage, dimming, dpms, suspend
+- [x] Numlock persistant (Hyprland + SDDM)
+- [x] Fastfetch avec logo Grimoire
+- [ ] ⚠️ Fenêtres flottantes / Waybar (bug upstream Hyprland)
 
 ### V2 — Modernisation
 - [ ] Waybar → AGS / Astal
@@ -209,7 +214,7 @@ dotfiles/
 - [ ] Shell Fish → ZSH
 - [ ] Installateur TUI interactif
 - [ ] Thèmes switchables
-- [ ] Curseur Grimoire v2 — rebuild Figma natif (pixel perfect)
+- [ ] Curseur Grimoire v2 — rebuild Figma natif
 
 ### V3 — Communauté
 - [ ] Site vitrine
@@ -220,13 +225,15 @@ dotfiles/
 
 ## 🔧 Notes techniques
 
+- **SwayOSD** : `swayosd-server` lancé via `autostart.lua`. Scroll molette sur modules Waybar backlight/pulseaudio
+- **Hypridle** : config dans `~/.config/hypr/hypridle.conf`. Lancé avec `-c ~/.config/hypr/hypridle.conf`
 - **Hyprpaper** : nécessite `start-hyprpaper.sh` avec `sleep 2` + `hyprctl hyprpaper wallpaper` pour chaque moniteur
-- **Hyprpaper.conf** : attention aux CRLF qui cassent le parsing — toujours éditer avec `nvim` ou `python3`
 - **Wlogout** : grille 2×2 via `-b 2`, icônes SVG convertis en PNG via `python-cairosvg`
-- **SDDM** : erreur `placeholderText` corrigée dans le thème
-- **Keybinds AZERTY** : utilise `code:10` à `code:19` pour les workspaces, compatible toutes dispositions clavier
+- **SDDM** : `Numlock=on` dans `/etc/sddm.conf`, thème Grimoire fonctionnel
+- **Keybinds AZERTY** : utilise `code:10` à `code:19` pour les workspaces
 - **xdg-terminals.list** : `~/.config/xdg-terminals.list` pointe sur `kitty.desktop`
 - **Stow** : peut nécessiter `rm -rf ~/.config/<app>` avant le stow si la config cible existe déjà
+- **Fastfetch** : logo `grimoire.png` généré via `magick` + `chafa`, rendu kitty width=45 height=20
 
 ---
 
